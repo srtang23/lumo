@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Lumo — glow with how you feel</title>
+<meta name="description" content="Lumo is a candle-warmer lamp that glows in the color of your mood. Connect your lamp, control the warming plate, and let your feelings choose the light." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;1,9..144,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <div class="ambient-glow" id="ambientGlow" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="brand">
+      <span class="brand-dot" id="brandDot"></span>
+      <span class="brand-name">lumo</span>
+    </div>
+    <nav class="site-nav">
+      <a href="#connect">Connect</a>
+      <a href="#control">Warmth</a>
+      <a href="#mood">Mood</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <p class="eyebrow">a lamp that listens</p>
+      <h1>Some days are amber.<br>Some days are indigo.</h1>
+      <p class="hero-sub">Lumo is a candle-warmer lamp that changes color with your mood — melt your favorite scent while the light quietly holds how you feel.</p>
+      <div class="hero-actions">
+        <a href="#connect" class="btn btn-primary">Connect your lamp</a>
+        <a href="#mood" class="btn btn-ghost">Tell it your mood</a>
+      </div>
+    </section>
+
+    <!-- CONNECT -->
+    <section id="connect" class="panel">
+      <div class="panel-head">
+        <h2>Connect your lamp</h2>
+        <p>Pair with your Lumo over Bluetooth to sync color and warmth in real time.</p>
+      </div>
+
+      <div class="card connect-card">
+        <div class="device-visual" id="deviceVisual" aria-hidden="true">
+          <div class="device-body">
+            <div class="device-plate" id="devicePlate"></div>
+            <div class="device-glow" id="deviceGlow"></div>
+          </div>
+        </div>
+
+        <div class="connect-info">
+          <div class="status-row">
+            <span class="status-dot" id="statusDot"></span>
+            <span id="statusText">Not connected</span>
+          </div>
+          <p class="muted small" id="connectHint">Works over Web Bluetooth in Chrome or Edge. Make sure your Lumo is powered on and nearby.</p>
+
+          <button id="connectBtn" class="btn btn-primary full">Connect lamp</button>
+          <button id="disconnectBtn" class="btn btn-ghost full hidden">Disconnect</button>
+
+          <div class="device-meta hidden" id="deviceMeta">
+            <div class="meta-row"><span>Device</span><span id="deviceName">—</span></div>
+            <div class="meta-row"><span>Firmware</span><span id="deviceFirmware">ESP32</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTROL -->
+    <section id="control" class="panel">
+      <div class="panel-head">
+        <h2>Warming plate</h2>
+        <p>Turn the heat on to melt your wax, or off to just keep the glow.</p>
+      </div>
+
+      <div class="card control-card">
+        <div class="toggle-row">
+          <div>
+            <h3>Heated plate</h3>
+            <p class="muted small" id="heatStateLabel">Off · plate is cool</p>
+          </div>
+          <button class="switch" id="heatSwitch" role="switch" aria-checked="false" aria-label="Toggle warming plate">
+            <span class="switch-knob"></span>
+          </button>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="toggle-row">
+          <div>
+            <h3>Lamp glow</h3>
+            <p class="muted small" id="lampStateLabel">On · showing current mood color</p>
+          </div>
+          <button class="switch is-on" id="glowSwitch" role="switch" aria-checked="true" aria-label="Toggle lamp glow">
+            <span class="switch-knob"></span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- MOOD -->
+    <section id="mood" class="panel">
+      <div class="panel-head">
+        <h2>Your mood, in color</h2>
+        <p>Every color Lumo has ever shown you, kept here quietly.</p>
+      </div>
+
+      <div class="card mood-card">
+        <div class="mood-current">
+          <div class="mood-swatch" id="moodSwatch"></div>
+          <div>
+            <p class="mood-label" id="moodEmotion">Calm</p>
+            <p class="muted small" id="moodDescription">Tap the figure in the corner and tell Lumo how you feel.</p>
+          </div>
+        </div>
+        <div class="mood-history" id="moodHistory" aria-label="Mood color history"></div>
+      </div>
+    </section>
+
+    <section class="panel about">
+      <div class="panel-head">
+        <h2>Why color</h2>
+        <p class="about-text">Naming a feeling can be hard. Choosing a color rarely is. Lumo turns what you type into a hue, then holds that light while your candle warms — a small, quiet mirror for whatever today is.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>lumo — embrace your mood</p>
+  </footer>
+
+  <!-- FLOATING MOOD FIGURE -->
+  <div class="mood-orb-wrap">
+    <div class="mood-panel" id="moodPanel">
+      <button class="mood-panel-close" id="moodPanelClose" aria-label="Close">×</button>
+      <p class="mood-panel-title">What's your mood today?</p>
+      <textarea id="moodInput" class="mood-input" placeholder="Tell Lumo how you're feeling…" rows="3"></textarea>
+      <button class="btn btn-primary full" id="moodSubmit">Find my color</button>
+      <div class="mood-result hidden" id="moodResult">
+        <div class="mood-result-swatch" id="moodResultSwatch"></div>
+        <div>
+          <p class="mood-result-emotion" id="moodResultEmotion">—</p>
+          <p class="muted small" id="moodResultText">—</p>
+        </div>
+      </div>
+    </div>
+
+    <button class="mood-orb" id="moodOrb" aria-label="Tell Lumo your mood" aria-expanded="false">
+      <svg id="orbFace" viewBox="0 0 48 48" width="26" height="26" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="24" cy="24" r="22" fill="currentColor" opacity="0.15"/>
+        <circle cx="17" cy="21" r="2.4" fill="currentColor"/>
+        <circle cx="31" cy="21" r="2.4" fill="currentColor"/>
+        <path d="M16 30c2.8 3 6 4.5 8 4.5s5.2-1.5 8-4.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+      </svg>
+    </button>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
