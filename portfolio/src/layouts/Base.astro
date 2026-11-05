@@ -1,0 +1,60 @@
+---
+import Nav from "../components/Nav.astro"
+import "../styles/fonts.css"
+import "../styles/global.css"
+
+interface Props {
+    title: string
+    description?: string
+}
+const { title, description = "Sophia Tang is a product designer creating experiences through research and systems thinking." } = Astro.props
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <link rel="icon" type="image/png" href="/images/favicon.png" />
+        <link rel="preload" href="/fonts/newsreader-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+        <link rel="preload" href="/fonts/geist-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+    </head>
+    <body>
+        <div class="paper" aria-hidden="true"></div>
+        <Nav />
+        <slot />
+
+        <script>
+            // Fade elements up when they first scroll into view.
+            const io = new IntersectionObserver(
+                (entries) => {
+                    for (const e of entries) {
+                        if (e.isIntersecting) {
+                            e.target.classList.add("in")
+                            io.unobserve(e.target)
+                        }
+                    }
+                },
+                { threshold: 0.15 },
+            )
+            document.querySelectorAll(".reveal").forEach((el) => io.observe(el))
+
+            // "Back" links return to the page you came from, or follow their href if you landed here directly.
+            document.addEventListener("click", (e) => {
+                const a = (e.target as HTMLElement).closest("a[data-back]")
+                if (!a) return
+                try {
+                    const from = document.referrer && new URL(document.referrer)
+                    if (from && from.origin === location.origin && from.pathname !== location.pathname) {
+                        e.preventDefault()
+                        history.back()
+                    }
+                } catch {}
+            })
+        </script>
+    </body>
+</html>

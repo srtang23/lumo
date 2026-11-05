@@ -1,0 +1,150 @@
+---
+import Base from "../layouts/Base.astro"
+import { projects } from "../data/projects"
+---
+
+<Base title="Sophia Tang · Product Designer">
+    <main class="home">
+        <header class="intro">
+            <h1 class="hello reveal">Hi, I’m Sophia.</h1>
+            <p class="lede reveal" style="--delay: 0.1s">A product designer creating experiences through research and systems thinking.</p>
+        </header>
+
+        <section class="work" id="selected-work" aria-labelledby="selected-work-tag">
+            <p class="tag reveal" id="selected-work-tag">#selected-work</p>
+            <div class="grid">
+                {
+                    projects.map((p, i) => (
+                        <a class="card reveal" href={p.href} style={`--delay: ${0.12 + (i % 2) * 0.06}s`}>
+                            <div class="thumb">
+                                <img src={p.image} alt={p.alt} loading={i < 2 ? "eager" : "lazy"} />
+                            </div>
+                            <h2 class="title">{p.homeTitle ?? p.title}</h2>
+                            <p class="blurb">{p.blurb}</p>
+                        </a>
+                    ))
+                }
+            </div>
+        </section>
+    </main>
+</Base>
+
+<style>
+    .home {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .intro,
+    .work {
+        width: 100%;
+        max-width: 75rem;
+    }
+    .intro {
+        display: flex;
+        flex-direction: column;
+        gap: 1.125rem;
+        padding: 12.5rem 3rem 6rem;
+    }
+    .hello,
+    .lede {
+        max-width: 62.5rem;
+        font-family: var(--serif);
+        letter-spacing: -0.02em;
+    }
+    .hello {
+        font-size: 4rem;
+        line-height: 1.05;
+        font-weight: 500;
+        color: var(--ink);
+    }
+    .lede {
+        font-size: 2.75rem;
+        line-height: 1.15;
+        font-weight: 400;
+        color: var(--label);
+    }
+    .work {
+        display: flex;
+        flex-direction: column;
+        gap: 1.75rem;
+        padding: 0 3rem 8.75rem;
+    }
+    .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3.5rem 1.75rem;
+    }
+    .card {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    .card.in {
+        transition:
+            opacity 0.9s var(--spring),
+            transform 0.4s var(--spring);
+    }
+    .card.in:hover {
+        transform: translateY(-0.25rem);
+    }
+    .thumb {
+        aspect-ratio: 1.6;
+        border-radius: 0.25rem;
+        overflow: hidden;
+    }
+    .thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.4s var(--spring);
+    }
+    .card:hover .thumb img {
+        transform: scale(1.015);
+    }
+    .title {
+        font: 400 1.5rem/1.2 var(--serif);
+        color: var(--ink);
+    }
+    .blurb {
+        font: 400 0.875rem/1.4 var(--sans);
+        letter-spacing: 0.01em;
+        color: var(--label);
+    }
+
+    @media (max-width: 1199.98px) {
+        .intro {
+            padding: 10rem 2rem 4.5rem;
+        }
+        .hello {
+            font-size: 3.25rem;
+        }
+        .lede {
+            font-size: 2.25rem;
+        }
+        .work {
+            padding: 0 2rem 7.5rem;
+        }
+        .grid {
+            gap: 1.75rem;
+        }
+    }
+    @media (max-width: 809.98px) {
+        .intro {
+            padding: 7.5rem 1.25rem 3.5rem;
+        }
+        .hello {
+            font-size: 2.5rem;
+        }
+        .lede {
+            font-size: 1.625rem;
+        }
+        .work {
+            padding: 0 1.25rem 6rem;
+        }
+        .grid {
+            grid-template-columns: 1fr;
+            gap: 2.25rem;
+        }
+    }
+</style>
