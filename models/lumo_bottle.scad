@@ -4,10 +4,10 @@ R_BODY   = 60.0 / 2;
 R_NECK   = 22.00;
 BASE_FIL = 8.0;
 TOP_FIL  = 2.0;
-Z_SH     = 139.29;   // shoulder start
+Z_SH     = 117.0;   // shoulder start
 Z_NECK   = 149.29;   // neck start
-SH_ROUND = 0.62;    // how domed the shoulder is
-NECK_BLEND = 0.25;  // tightness of the curve into the neck
+SH_ROUND = 0.55;    // how domed the shoulder is
+NECK_BLEND = 0.40;  // tightness of the curve into the neck
 $fn = 128;
 
 function arc(cx, cz, r, a0, a1, n) =
