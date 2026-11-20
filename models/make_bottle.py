@@ -9,11 +9,11 @@ import numpy as np
 # ---- Parameters (from the reference drawing) -------------------------------
 H        = 179.29        # overall height
 R_BODY   = 46.44 / 2     # body radius
-R_NECK   = 13.90         # neck radius (~60% of body, per the side outline)
+R_NECK   = 22.00        # neck radius (44 mm dia -> 40 mm flat top after fillet)
 BASE_FIL = 8.0           # rounded edge at the bottom
-TOP_FIL  = 2.5           # soft edge on the cap top
-Z_SHOULDER_START = 133.0 # where the body starts curving in
-Z_NECK_START     = 157.0 # where the neck becomes straight
+TOP_FIL  = 2.0           # soft edge on the cap top
+Z_SHOULDER_START = 139.29 # where the body starts curving in
+Z_NECK_START     = 149.29 # where the neck becomes straight
 SH_ROUND = 0.62          # 0..1, how domed/full the shoulder is
 NECK_BLEND = 0.25        # 0..1, tightness of the curve into the neck
 SEGMENTS = 128           # around the axis

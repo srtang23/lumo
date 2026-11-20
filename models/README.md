@@ -1,10 +1,10 @@
 # Lumo bottle — 3D model
 
-Solid body, 179.29 mm tall × 46.44 mm diameter (units: mm, Z-up, base at Z=0).
+Solid body, 179.29 mm tall × 46.44 mm diameter; neck 44 mm dia × 30 mm tall with a 40 mm flat top (units: mm, Z-up, base at Z=0).
 
 | File | Use |
 |---|---|
-| `lumo_bottle.stl` | 3D printing / slicers (watertight, ~254 mL volume) |
+| `lumo_bottle.stl` | 3D printing / slicers (watertight) |
 | `lumo_bottle.obj` | Blender, Fusion, three.js, etc. |
 | `lumo_bottle.scad` | Parametric OpenSCAD source |
 | `make_bottle.py` | Regenerates STL + OBJ (numpy only): `python3 models/make_bottle.py` |
