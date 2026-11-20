@@ -1,6 +1,6 @@
 // Lumo bottle body - parametric OpenSCAD source (units: mm)
 H        = 179.29;
-R_BODY   = 46.44 / 2;
+R_BODY   = 60.0 / 2;
 R_NECK   = 22.00;
 BASE_FIL = 8.0;
 TOP_FIL  = 2.0;

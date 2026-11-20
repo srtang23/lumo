@@ -8,7 +8,7 @@ import numpy as np
 
 # ---- Parameters (from the reference drawing) -------------------------------
 H        = 179.29        # overall height
-R_BODY   = 46.44 / 2     # body radius
+R_BODY   = 60.0 / 2      # body radius
 R_NECK   = 22.00        # neck radius (44 mm dia -> 40 mm flat top after fillet)
 BASE_FIL = 8.0           # rounded edge at the bottom
 TOP_FIL  = 2.0           # soft edge on the cap top
