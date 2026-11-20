@@ -12,10 +12,9 @@ R_BODY   = 60.0 / 2      # body radius
 R_NECK   = 22.00        # neck radius (44 mm dia -> 40 mm flat top after fillet)
 BASE_FIL = 8.0           # rounded edge at the bottom
 TOP_FIL  = 2.0           # soft edge on the cap top
-Z_SHOULDER_START = 117.0 # where the body starts curving in
+Z_SHOULDER_START = 112.0 # where the body starts curving in
 Z_NECK_START     = 149.29 # where the neck becomes straight
-SH_ROUND = 0.55          # 0..1, how domed/full the shoulder is
-NECK_BLEND = 0.40        # 0..1, tightness of the curve into the neck
+SH_FULL  = 0.35          # -1..1, >0 keeps the shoulder fuller/rounder (more palm-filling)
 SEGMENTS = 128           # around the axis
 # -----------------------------------------------------------------------------
 
@@ -29,13 +28,15 @@ def profile():
     pts += arc(R_BODY - BASE_FIL, BASE_FIL, BASE_FIL, -math.pi / 2, 0, 16)
     # straight body wall
     pts += [(R_BODY, z) for z in np.linspace(BASE_FIL, Z_SHOULDER_START, 24)[1:]]
-    # shoulder: cubic Bezier, vertical tangents at both ends (G1 continuous)
+    # shoulder: curvature-continuous (G2) blend - quintic smootherstep, so the
+    # bend fades in/out with zero curvature at the body and the neck (no visible
+    # start/stop line). SH_FULL skews it so the dome stays full near the body.
     h = Z_NECK_START - Z_SHOULDER_START
-    P = np.array([(R_BODY, Z_SHOULDER_START), (R_BODY, Z_SHOULDER_START + SH_ROUND * h),
-                  (R_NECK, Z_NECK_START - NECK_BLEND * h), (R_NECK, Z_NECK_START)])
-    for t in np.linspace(0, 1, 48)[1:]:
-        u = 1 - t
-        pts.append(tuple(u**3 * P[0] + 3*u*u*t * P[1] + 3*u*t*t * P[2] + t**3 * P[3]))
+    for t in np.linspace(0, 1, 64)[1:]:
+        u = 1 - t                                   # 1 at body, 0 at neck
+        g = u + SH_FULL * u * (1 - u)
+        s = g**3 * (g * (6 * g - 15) + 10)
+        pts.append((R_NECK + (R_BODY - R_NECK) * s, Z_SHOULDER_START + h * t))
     # straight neck
     pts += [(R_NECK, z) for z in np.linspace(Z_NECK_START, H - TOP_FIL, 8)[1:]]
     # top fillet into flat top
