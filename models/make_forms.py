@@ -101,6 +101,14 @@ class Form:
         F += [(top, ring(len(zs) - 1, k), ring(len(zs) - 1, k + 1)) for k in range(N)]
         return np.array(V, float), np.array(F)
 
+def ellip_end(z, R=27.5, a=11.0, b=20.0):
+    """Scale for a cylinder of radius R whose ends round over an elliptical
+    quarter (a inward, b tall), leaving a flat end face of radius R - a."""
+    u = min(z, H - z)
+    if u >= b:
+        return 1.0
+    return (R - a + a * math.sqrt(max(1 - ((b - u) / b) ** 2, 0))) / R
+
 def stepped(z):
     # three stacked tiers with soft 3 mm transitions
     return 25 - 3 * smoothstep(78, 84, z) - 3 * smoothstep(143, 149, z)
@@ -127,6 +135,9 @@ FORMS = [
          dense=((54, 61), (144, 151)), label="Lantern"),
     Form("12_stacked", None, 25, fb=4, ft=6, radius=stepped,
          dense=((77, 85), (142, 150)), label="Stacked"),
+    # faceted capsule: 24 crisp facets that wrap over the rounded ends
+    Form("15_faceted_capsule_55", polygon(24, math.pi / 24), 0.8, fb=0, ft=0,
+         width=55.0, scale=ellip_end, dense=((0, 20), (180, 200)), label="Faceted capsule"),
     # 55 mm versions
     Form("13_hexagon_55", polygon(6, math.pi / 2), 6, fb=4, ft=6, width=55.0,
          label="Hexagon 55"),
