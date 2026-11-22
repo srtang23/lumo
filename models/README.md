@@ -24,3 +24,23 @@ One-piece rounded-square body, 50 × 50 × 200 mm. Corner radius 12 mm,
 | `lumo_square.obj` | Rendering / CAD |
 | `make_square.py` | Regenerates the above: `python3 models/make_square.py` |
 | `preview_square.png` | Render |
+
+## Form-factor studies (`forms/`)
+
+Twelve alternative shapes, each within 50 × 50 × 200 mm, watertight STLs.
+Regenerate with `python3 models/make_forms.py`; see `forms/preview_forms.png`.
+
+| File | Shape | Footprint (mm) |
+|---|---|---|
+| `01_capsule.stl` | Cylinder with a full dome top | Ø50 |
+| `02_tapered.stl` | Cylinder narrowing Ø50 → Ø40 | Ø50 |
+| `03_waisted.stl` | 3 mm grip waist at mid-height | Ø50 |
+| `04_fluted.stl` | 16 shallow vertical flutes | Ø50 |
+| `05_hexagon.stl` | Soft-edged hexagonal prism | 45 × 50 |
+| `06_octagon.stl` | Soft-edged octagonal prism | 50 × 50 |
+| `07_soft_triangle.stl` | Rounded triangular prism | 50 × 46 |
+| `08_twisted_square.stl` | Rounded square, 60° twist (fits a Ø50 circle) | 50 × 50 |
+| `09_pebble.stl` | Oval/stadium section, rounded top | 50 × 35 |
+| `10_obelisk.stl` | Rounded square tapering to 72% at top | 50 × 50 |
+| `11_lantern.stl` | Cylinder with a 2 mm recessed light band (60–145 mm) | Ø50 |
+| `12_stacked.stl` | Three tiers: Ø50 / Ø44 / Ø38 | Ø50 |
