@@ -10,7 +10,7 @@ from make_bottle import write_stl, write_obj
 
 # ---- Parameters --------------------------------------------------------------
 H        = 200.0   # overall height
-W        = 60.0    # width (square footprint W x W)
+W        = 50.0    # width (square footprint W x W)
 R_CORNER = 12.0    # vertical corner radius of the rounded square
 TOP_FIL  = 10.0    # big soft rounding on the top edges (< R_CORNER)
 BASE_FIL = 5.0     # rounding on the bottom edge

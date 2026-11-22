@@ -15,7 +15,7 @@ Tweak the parameters at the top of `make_bottle.py` / `lumo_bottle.scad`
 
 ## Square variant
 
-One-piece rounded-square body, 60 × 60 × 200 mm. Corner radius 12 mm,
+One-piece rounded-square body, 50 × 50 × 200 mm. Corner radius 12 mm,
 10 mm top rounding, 5 mm base rounding.
 
 | File | Use |
