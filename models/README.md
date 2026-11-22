@@ -44,3 +44,5 @@ Regenerate with `python3 models/make_forms.py`; see `forms/preview_forms.png`.
 | `10_obelisk.stl` | Rounded square tapering to 72% at top | 50 × 50 |
 | `11_lantern.stl` | Cylinder with a 2 mm recessed light band (60–145 mm) | Ø50 |
 | `12_stacked.stl` | Three tiers: Ø50 / Ø44 / Ø38 | Ø50 |
+| `13_hexagon_55.stl` | Hexagon, 55 mm corner-to-corner | 49 × 55 |
+| `14_twisted_square_55.stl` | Twisted square, stays within 55 × 55 at every height | 55 × 55 |

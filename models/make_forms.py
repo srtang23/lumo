@@ -26,7 +26,7 @@ def smoothstep(e0, e1, x):
 class Form:
     def __init__(self, name, core, R, fb=4.0, ft=6.0, scale=lambda z: 1.0,
                  radius=None, twist=lambda z: 0.0, flutes=0, flute_amp=0.0,
-                 step=5.0, dense=(), label=""):
+                 step=5.0, dense=(), label="", width=W):
         self.name, self.label = name, label
         self.core0 = np.zeros((1, 2)) if core is None else np.asarray(core, float)
         self.R0, self.fb, self.ft = R, fb, ft
@@ -35,6 +35,7 @@ class Form:
         self.flutes, self.flute_amp = flutes, flute_amp
         self.step, self.dense = step, dense
         self.twisting = twist(H) != 0
+        self.width = width
 
     def fit(self):
         """Centre the core and scale it so the shape fills W (max of x/y).
@@ -45,9 +46,9 @@ class Form:
         c = self.core0
         c = c - (c.max(0) + c.min(0)) / 2
         if self.twisting:
-            k = (W / 2 - self.R0) / np.linalg.norm(c, axis=1).max()
+            k = (self.width / 2 - self.R0) / np.linalg.norm(c, axis=1).max()
         else:
-            k = (W - 2 * self.R0) / (c.max(0) - c.min(0)).max()
+            k = (self.width - 2 * self.R0) / (c.max(0) - c.min(0)).max()
         self.core0 = c * k
 
     def z_samples(self):
@@ -126,6 +127,11 @@ FORMS = [
          dense=((54, 61), (144, 151)), label="Lantern"),
     Form("12_stacked", None, 25, fb=4, ft=6, radius=stepped,
          dense=((77, 85), (142, 150)), label="Stacked"),
+    # 55 mm versions
+    Form("13_hexagon_55", polygon(6, math.pi / 2), 6, fb=4, ft=6, width=55.0,
+         label="Hexagon 55"),
+    Form("14_twisted_square_55", polygon(4, math.pi / 4), 10, fb=4, ft=6, width=55.0,
+         twist=lambda z: math.radians(60) * z / H, step=2.5, label="Twisted square 55"),
 ]
 
 if __name__ == "__main__":
