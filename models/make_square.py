@@ -1,9 +1,8 @@
-"""Generate the Lumo square-form bottle: rounded-square body + separate cap.
+"""Generate the Lumo square-form bottle: one-piece rounded-square body.
 
 All units mm, Z-up, base at Z=0. Edit parameters and re-run:
     python3 models/make_square.py
-Outputs lumo_square_body.stl, lumo_square_cap.stl, lumo_square.stl (both
-parts together, as assembled) and lumo_square.obj.
+Outputs lumo_square.stl and lumo_square.obj.
 """
 import math, os
 import numpy as np
@@ -13,27 +12,19 @@ from make_bottle import write_stl, write_obj
 H        = 200.0   # overall height
 W        = 60.0    # width (square footprint W x W)
 R_CORNER = 12.0    # vertical corner radius of the rounded square
-CAP_H    = 62.0    # cap height (seam is at H - CAP_H)
-TOP_FIL  = 10.0    # big soft rounding on the top of the cap (< R_CORNER)
+TOP_FIL  = 10.0    # big soft rounding on the top edges (< R_CORNER)
 BASE_FIL = 5.0     # rounding on the bottom edge
-SEAM_FIL = 1.0     # small rounding either side of the seam, forms the groove
 N_CORNER = 24      # segments per corner
 # -----------------------------------------------------------------------------
 
 A = W / 2
-Z_SEAM = H - CAP_H
 
 def arc(cx, cz, r, a0, a1, n):
     return [(cx + r * math.cos(a), cz + r * math.sin(a)) for a in np.linspace(a0, a1, n)]
 
-def body_profile():
+def profile():
     """(r, z) where r is the local radius around the corner centres."""
     p  = arc(R_CORNER - BASE_FIL, BASE_FIL, BASE_FIL, -math.pi / 2, 0, 12)
-    p += arc(R_CORNER - SEAM_FIL, Z_SEAM - SEAM_FIL, SEAM_FIL, 0, math.pi / 2, 6)
-    return p
-
-def cap_profile():
-    p  = arc(R_CORNER - SEAM_FIL, Z_SEAM + SEAM_FIL, SEAM_FIL, -math.pi / 2, 0, 6)
     p += arc(R_CORNER - TOP_FIL, H - TOP_FIL, TOP_FIL, 0, math.pi / 2, 24)
     return p
 
@@ -62,12 +53,8 @@ def sweep(prof):
 
 if __name__ == "__main__":
     here = os.path.dirname(os.path.abspath(__file__))
-    bV, bF = sweep(body_profile())
-    cV, cF = sweep(cap_profile())
-    write_stl(os.path.join(here, "lumo_square_body.stl"), bV, bF)
-    write_stl(os.path.join(here, "lumo_square_cap.stl"), cV, cF)
-    V = np.vstack([bV, cV]); F = np.vstack([bF, cF + len(bV)])
+    V, F = sweep(profile())
     write_stl(os.path.join(here, "lumo_square.stl"), V, F)
     write_obj(os.path.join(here, "lumo_square.obj"), V, F)
     ext = V.max(0) - V.min(0)
-    print(f"assembled size {ext[0]:.2f} x {ext[1]:.2f} x {ext[2]:.2f} mm, seam at z={Z_SEAM}")
+    print(f"size {ext[0]:.2f} x {ext[1]:.2f} x {ext[2]:.2f} mm")

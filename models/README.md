@@ -15,14 +15,12 @@ Tweak the parameters at the top of `make_bottle.py` / `lumo_bottle.scad`
 
 ## Square variant
 
-Rounded-square body with a separate cap, 60 × 60 × 200 mm. Corner radius 12 mm,
-cap 62 mm tall (seam at 138 mm), 10 mm top rounding, 5 mm base rounding.
+One-piece rounded-square body, 60 × 60 × 200 mm. Corner radius 12 mm,
+10 mm top rounding, 5 mm base rounding.
 
 | File | Use |
 |---|---|
-| `lumo_square.stl` | Both parts as assembled (single file) |
-| `lumo_square_body.stl` | Body only (watertight) |
-| `lumo_square_cap.stl` | Cap only (watertight) |
-| `lumo_square.obj` | Both parts, for rendering / CAD |
+| `lumo_square.stl` | 3D printing / slicers (watertight) |
+| `lumo_square.obj` | Rendering / CAD |
 | `make_square.py` | Regenerates the above: `python3 models/make_square.py` |
 | `preview_square.png` | Render |
