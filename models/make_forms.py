@@ -135,9 +135,10 @@ FORMS = [
          dense=((54, 61), (144, 151)), label="Lantern"),
     Form("12_stacked", None, 25, fb=4, ft=6, radius=stepped,
          dense=((77, 85), (142, 150)), label="Stacked"),
-    # faceted capsule: 24 crisp facets that wrap over the rounded ends
-    Form("15_faceted_capsule_55", polygon(24, math.pi / 24), 0.8, fb=0, ft=0,
-         width=55.0, scale=ellip_end, dense=((0, 20), (180, 200)), label="Faceted capsule"),
+    # faceted cylinder: 24 crisp facets, full-width ends with a 3 mm soft edge
+    Form("15_faceted_cylinder_55", polygon(24, math.pi / 24), 0.8, fb=0, ft=0,
+         width=55.0, scale=lambda z: ellip_end(z, a=3.0, b=3.0),
+         dense=((0, 3), (197, 200)), label="Faceted cylinder"),
     # 55 mm versions
     Form("13_hexagon_55", polygon(6, math.pi / 2), 6, fb=4, ft=6, width=55.0,
          label="Hexagon 55"),

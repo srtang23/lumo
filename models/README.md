@@ -46,4 +46,4 @@ Regenerate with `python3 models/make_forms.py`; see `forms/preview_forms.png`.
 | `12_stacked.stl` | Three tiers: Ø50 / Ø44 / Ø38 | Ø50 |
 | `13_hexagon_55.stl` | Hexagon, 55 mm corner-to-corner | 49 × 55 |
 | `14_twisted_square_55.stl` | Twisted square, stays within 55 × 55 at every height | 55 × 55 |
-| `15_faceted_capsule_55.stl` | Ø55 rounded cylinder, 24 crisp facets wrapping over deep elliptical ends (Ø33 flat end faces) | 55 × 55 |
+| `15_faceted_cylinder_55.stl` | Ø55 cylinder, 24 crisp facets, full-width ends with a 3 mm soft edge | 55 × 55 |
