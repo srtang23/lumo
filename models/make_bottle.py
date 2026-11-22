@@ -7,13 +7,13 @@ import math, os, struct
 import numpy as np
 
 # ---- Parameters (from the reference drawing) -------------------------------
-H        = 179.29        # overall height
+H        = 200.0         # overall height
 R_BODY   = 60.0 / 2      # body radius
 R_NECK   = 22.00        # neck radius (44 mm dia -> 40 mm flat top after fillet)
 BASE_FIL = 8.0           # rounded edge at the bottom
 TOP_FIL  = 2.0           # soft edge on the cap top
-Z_SHOULDER_START = 112.0 # where the body starts curving in
-Z_NECK_START     = 149.29 # where the neck becomes straight
+Z_SHOULDER_START = 132.7 # where the body starts curving in
+Z_NECK_START     = 170.0 # where the neck becomes straight
 SH_FULL  = 0.35          # -1..1, >0 keeps the shoulder fuller/rounder (more palm-filling)
 SEGMENTS = 128           # around the axis
 # -----------------------------------------------------------------------------

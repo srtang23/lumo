@@ -1,6 +1,6 @@
 # Lumo bottle — 3D model
 
-Solid body, 179.29 mm tall × 60 mm diameter; neck 44 mm dia × 30 mm tall with a 40 mm flat top (units: mm, Z-up, base at Z=0).
+Solid body, 200 mm tall × 60 mm diameter; neck 44 mm dia × 30 mm tall with a 40 mm flat top (units: mm, Z-up, base at Z=0).
 
 | File | Use |
 |---|---|
